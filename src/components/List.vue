@@ -19,6 +19,11 @@ const fetchBoardList = async () => {
   }
 };
 
+// 게시글 상세 페이지로 이동
+const goToBoardDetail = (boardIdx) => {
+  router.push(`/board/${boardIdx}`); // 🔥 동적 라우팅
+};
+
 // 페이지 이동 (게시글 등록 페이지로)
 const goToRegisterPage = () => {
   router.push("/register");
@@ -41,7 +46,7 @@ onMounted(fetchBoardList);
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(board, index) in boardList" :key="board.id">
+        <tr v-for="(board, index) in boardList" :key="board.idx" @click="goToBoardDetail(board.idx)">
           <td>{{ index + 1 }}</td>
           <td>{{ board.title }}</td>
           <td>{{ board.writer }}</td>
@@ -78,6 +83,14 @@ td {
 
 th {
   background-color: #f4f4f4;
+}
+
+tbody tr {
+  cursor: pointer;
+}
+
+tbody tr:hover {
+  background-color: #f0f0f0;
 }
 
 .register-button {

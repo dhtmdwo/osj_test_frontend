@@ -3,6 +3,10 @@ import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router"; // Vue Router 사용
 
+const goToListPage = () => {
+  router.push("/"); // 홈(목록)으로 이동
+};
+
 const router = useRouter(); // 페이지 이동을 위한 Vue Router 사용
 const newPost = ref({
   title: "",
@@ -38,6 +42,7 @@ const createPost = async () => {
       <textarea v-model="newPost.content" placeholder="내용 입력"></textarea>
       <input type="text" v-model="newPost.writer" placeholder="작성자 입력" />
       <button @click="createPost" class="submit-button">게시글 등록</button>
+      <button @click="goToListPage" class="submit-button">목록으로 가기</button>
     </div>
   </div>
 </template>
@@ -80,6 +85,7 @@ const createPost = async () => {
   color: white;
   border: none;
   cursor: pointer;
+  margin: 5px 0;
 }
 
 .submit-button:hover {
